@@ -1,9 +1,15 @@
 {
   "WEATHER": {
+    "LIST_OF_CITIES": "List of Cities",
     "FIELDS": {
-      "NAME": "Name",
-      "TEMPERATURE": "Temperature",
-      "WIND_SPEED": "Wind Speed"
+      "CITY_NAME": "City Name",
+      "TEMPERATURE": "Temperature (m/s)",
+      "WIND_SPEED": "Wind Speed (C)"
+    },
+    "FORECAST": {
+      "TEMPERATURE": "Temperature (m/s)",
+      "WIND_SPEED": "Wind Speed (C)",
+      "TIME": "Time"
     }
   }
 }

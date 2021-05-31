@@ -7,8 +7,11 @@ import { map } from 'rxjs/operators';
 import { ApiUrls } from '@Enums/api-urls.enum';
 import { OpenWeatherUnits } from '@Enums/open-weather-units.enum';
 import { environment } from '@Environment';
+import { MapCoordinates } from '@Models/map-coordinates.model';
 
+import { CityForecast } from '../models/city-forecast.model';
 import { CityWeather } from '../models/city-weather.model';
+import { ForecastResponse, ForecastResponseHourly } from '../models/forecast-response.model';
 import { WeatherResponse } from '../models/weather-response.model';
 
 @Injectable()
@@ -34,7 +37,34 @@ export class WeatherRepository {
           name: weather.name,
           temperature: weather.main.temp,
           windSpeed: weather.wind.speed,
+          coordinates: {
+            lat: weather.coord.lat,
+            lon: weather.coord.lon,
+          }
         })),
+      );
+  }
+
+  public getCityForecast(cityCoordinates: MapCoordinates): Observable<CityForecast[]> {
+    const url: string = `${environment.openWeatherApi.baseUrl}/${ApiUrls.OneCall}`;
+    const params: Params = {
+      ...cityCoordinates,
+      appid: environment.openWeatherApi.key,
+      units: OpenWeatherUnits.Metric,
+      exclude: 'current,minutely,daily,alerts'
+    };
+
+    return this.httpClient.get<ForecastResponse>(url , { params })
+      .pipe(
+        map((cityForecast: ForecastResponse): CityForecast[] => (
+          cityForecast.hourly
+            .slice(0, 5)
+            .map((cityForecastHourly: ForecastResponseHourly) => ({
+              dateTime: new Date(cityForecastHourly.dt * 1000),
+              temperature: cityForecastHourly.temp,
+              windSpeed: cityForecastHourly.wind_speed,
+            }))
+        )),
       );
   }
 }

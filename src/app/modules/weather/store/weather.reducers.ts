@@ -1,12 +1,17 @@
 import { ActionReducer, createReducer, on } from '@ngrx/store';
 
-import { getCityWeathersSuccess, setPending } from './weather.actions';
+import { getCityForecastSuccess, getCityWeathersSuccess, setPending } from './weather.actions';
 import { WeatherState } from './weather.state';
-import { GetCityWeathersSuccessActionType, SetPendingActionType } from '../types/action.types';
+import {
+  GetCityForecastSuccessActionType,
+  GetCityWeathersSuccessActionType,
+  SetPendingActionType,
+} from '../types/action.types';
 
 export const weatherInitialState: WeatherState = {
   cityWeathers: [],
   pending: false,
+  cityForecastList: [],
 };
 
 export const weatherReducer: ActionReducer<WeatherState> = createReducer(
@@ -18,5 +23,9 @@ export const weatherReducer: ActionReducer<WeatherState> = createReducer(
   on(getCityWeathersSuccess, (state: WeatherState, action: GetCityWeathersSuccessActionType): WeatherState => ({
     ...state,
     cityWeathers: action.cityWeathers,
+  })),
+  on(getCityForecastSuccess, (state: WeatherState, action: GetCityForecastSuccessActionType): WeatherState => ({
+    ...state,
+    cityForecastList: action.cityForecastList,
   })),
 );

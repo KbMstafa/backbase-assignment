@@ -3,6 +3,7 @@ import { NgModule, Provider } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 
 import { AppRoutes } from '@Enums/routes.enum';
@@ -15,13 +16,16 @@ import { WeatherFacade } from './store/weather.facade';
 import { weatherReducer } from './store/weather.reducers';
 import { WeatherRoutingModule } from './weather-routing.module';
 import { CityWeathersResolver } from './shared/city-weathers.resolver';
+import { CityForecastComponent } from './components/city-forecast/city-forecast.component';
 
 const components: ComponentsType = [
   CitiesComponent,
+  CityForecastComponent,
 ];
 
 const primengModules: ModulesType = [
   TableModule,
+  ChartModule,
 ];
 
 const modules: ModulesType = [
