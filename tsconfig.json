@@ -22,7 +22,8 @@
     ],
     "paths": {
       "@Types/*": ["app/shared/types/*"],
-      "@Loaders/*": ["app/shared/loaders/*"]
+      "@Loaders/*": ["app/shared/loaders/*"],
+      "@Models/*": ["app/shared/models/*"]
     }
   },
   "angularCompilerOptions": {
