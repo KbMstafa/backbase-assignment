@@ -1,0 +1,9 @@
+{
+  "WEATHER": {
+    "FIELDS": {
+      "NAME": "Name",
+      "TEMPERATURE": "Temperature",
+      "WIND_SPEED": "Wind Speed"
+    }
+  }
+}

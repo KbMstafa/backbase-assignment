@@ -1,3 +1,10 @@
-export const environment = {
-  production: true
+import { Environment } from '@Models/environment.model';
+
+export const environment: Environment = {
+  production: true,
+  defaultLang: 'en',
+  openWeatherApi: {
+    key: 'd146c3ff30ee6ff4ec0160059dbebbcc',
+    baseUrl: 'https://api.openweathermap.org/data/2.5',
+  },
 };

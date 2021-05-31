@@ -21,6 +21,8 @@
       "dom"
     ],
     "paths": {
+      "@Environment": ["environments/environment"],
+      "@Modules/*": ["app/modules/*"],
       "@Types/*": ["app/shared/types/*"],
       "@Loaders/*": ["app/shared/loaders/*"],
       "@Models/*": ["app/shared/models/*"],
