@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 import { ApiUrls } from '@Enums/api-urls.enum';
 import { OpenWeatherUnits } from '@Enums/open-weather-units.enum';
@@ -60,7 +61,7 @@ export class WeatherRepository {
           cityForecast.hourly
             .slice(0, 5)
             .map((cityForecastHourly: ForecastResponseHourly) => ({
-              dateTime: new Date(cityForecastHourly.dt * 1000),
+              time: moment(cityForecastHourly.dt * 1000).format('HH:mm A'),
               temperature: cityForecastHourly.temp,
               windSpeed: cityForecastHourly.wind_speed,
             }))

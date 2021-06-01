@@ -1,5 +1,5 @@
 export interface CityForecast {
-  dateTime: Date;
+  time: string;
   temperature: number;
   windSpeed: number;
 }

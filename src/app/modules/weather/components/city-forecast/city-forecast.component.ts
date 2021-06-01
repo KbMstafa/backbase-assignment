@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import * as moment from 'moment';
 
-import { CityForecast } from '@Modules/weather/models/city-forecast.model';
-import { WeatherFacade } from '@Modules/weather/store/weather.facade';
-import { TranslateService } from '@ngx-translate/core';
-
+import { TEMPERATURE_DATASET_CONFIGURATION } from '../../consts/temperature-dataset-conf.const';
+import { WIND_SPEED_DATASET_CONFIGURATION } from '../../consts/wind-speed-dataset-conf.const';
+import { CityForecast } from '../../models/city-forecast.model';
+import { WeatherFacade } from '../../store/weather.facade';
+import { getCityForecastOptions } from '../../utils/get-forecast-options.util';
 
 @Component({
   selector: 'ba-city-forecast',
@@ -48,7 +49,7 @@ export class CityForecastComponent implements OnInit, OnDestroy {
     const windSpeedData: number[] = [];
 
     cityForecastList.forEach((cityForecast: CityForecast): void => {
-      labels.push(moment(cityForecast.dateTime).format('HH:mm A'));
+      labels.push(cityForecast.time);
       temperatureData.push(cityForecast.temperature);
       windSpeedData.push(cityForecast.windSpeed);
     });
@@ -57,74 +58,24 @@ export class CityForecastComponent implements OnInit, OnDestroy {
       labels,
       datasets: [
         {
-          type: 'line',
+          ...WIND_SPEED_DATASET_CONFIGURATION,
           label: this.translateService.instant('WEATHER.FORECAST.WIND_SPEED'),
-          borderColor: '#42A5F5',
-          borderWidth: 2,
-          pointRadius: 4,
-          pointBackgroundColor: '#42A5F5',
-          fill: false,
           data: windSpeedData,
-          yAxisID: 'wind-speed',
         },
         {
-          type: 'bar',
+          ...TEMPERATURE_DATASET_CONFIGURATION,
           label: this.translateService.instant('WEATHER.FORECAST.TEMPERATURE'),
-          backgroundColor: '#66BB6A',
           data: temperatureData,
-          borderColor: 'white',
-          borderWidth: 2,
-          yAxisID: 'temperature',
         },
       ]
     };
   }
 
   private setCityForecastOptions(): void {
-    this.cityForecastOptions = {
-      responsive: true,
-      title: {
-        display: true,
-        text: 'Forecast',
-        fontSize: 25,
-      },
-      legend: {
-        labels: { fontColor: 'rgba(255, 255, 255, 0.6)' }
-      },
-      scales: {
-        xAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: this.translateService.instant('WEATHER.FORECAST.TIME'),
-          },
-          ticks: { fontColor: 'rgba(255, 255, 255, 0.87)' },
-          gridLines: { color: 'rgba(255, 255, 255, 0.6)' }
-        }],
-        yAxes: [
-          {
-            id: 'temperature',
-            display: true,
-            position: 'left',
-            scaleLabel: {
-              display: true,
-              labelString: this.translateService.instant('WEATHER.FORECAST.TEMPERATURE'),
-            },
-            ticks: { fontColor: 'rgba(255, 255, 255, 0.87)' },
-            gridLines: { color: 'rgba(255, 255, 255, 0.6)' },
-          },
-          {
-            id: 'wind-speed',
-            display: 'auto',
-            position: 'right',
-            scaleLabel: {
-              display: true,
-              labelString: this.translateService.instant('WEATHER.FORECAST.WIND_SPEED'),
-            },
-            ticks: { showLabelBackdrop: false, fontColor: 'rgba(255, 255, 255, 0.87)' },
-            gridLines: { display: false },
-          },
-        ],
-      }
-    };
+    this.cityForecastOptions = getCityForecastOptions(
+      this.translateService.instant('WEATHER.FORECAST.TIME'),
+      this.translateService.instant('WEATHER.FORECAST.TEMPERATURE'),
+      this.translateService.instant('WEATHER.FORECAST.WIND_SPEED'),
+    );
   }
 }

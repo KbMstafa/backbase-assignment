@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:coverage": "ng test --code-coverage"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "chart.js": "^2.9.4",
     "moment": "^2.29.1",
+    "ng-mocks": "^12.0.2",
     "primeng": "^12.0.0-rc.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",

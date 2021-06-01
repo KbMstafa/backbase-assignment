@@ -1,35 +1,44 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateService } from '@ngx-translate/core';
+
+import { environment } from '@Environment';
+import { SpyObject } from '@Types/spy-object.type';
+
 import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {
-  beforeEach(async () => {
+describe('AppComponent', (): void => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let mockedTranslateService: SpyObject<TranslateService>;
+
+  beforeEach(async (): Promise<void> => {
+    mockedTranslateService = jasmine.createSpyObj('TranslateService', [ 'setDefaultLang' ]);
+
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+      providers: [
+        { provide: TranslateService, useValue: mockedTranslateService },
+      ],
+    })
+    .compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  beforeEach((): void => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
 
-  it(`should have as title 'backbase-assignment'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('backbase-assignment');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('backbase-assignment app is running!');
+  });
+
+  describe('ngOnInit', (): void => {
+    it('should call translateService.setDefaultLang', (): void => {
+      expect(mockedTranslateService.setDefaultLang).toHaveBeenCalledOnceWith(environment.defaultLang);
+    });
   });
 });
