@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { ApiUrls } from '@Enums/api-urls.enum';
-import { OpenWeatherUnits } from '@Enums/open-weather-units.enum';
 import { environment } from '@Environment';
 import { MapCoordinates } from '@Models/map-coordinates.model';
 
@@ -25,11 +24,7 @@ export class WeatherRepository {
 
   public getCityWeather(cityId: number): Observable<CityWeather> {
     const url: string = `${environment.openWeatherApi.baseUrl}/${ApiUrls.Weather}`;
-    const params: Params = {
-      id: cityId,
-      appid: environment.openWeatherApi.key,
-      units: OpenWeatherUnits.Metric,
-    };
+    const params: Params = { id: cityId };
 
     return this.httpClient.get<WeatherResponse>(url , { params })
       .pipe(
@@ -48,12 +43,7 @@ export class WeatherRepository {
 
   public getCityForecast(cityCoordinates: MapCoordinates): Observable<CityForecast[]> {
     const url: string = `${environment.openWeatherApi.baseUrl}/${ApiUrls.OneCall}`;
-    const params: Params = {
-      ...cityCoordinates,
-      appid: environment.openWeatherApi.key,
-      units: OpenWeatherUnits.Metric,
-      exclude: 'current,minutely,daily,alerts'
-    };
+    const params: Params = { ...cityCoordinates, exclude: 'current,minutely,daily,alerts' };
 
     return this.httpClient.get<ForecastResponse>(url , { params })
       .pipe(

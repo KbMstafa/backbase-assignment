@@ -5,7 +5,6 @@ import { take } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { ApiUrls } from '@Enums/api-urls.enum';
-import { OpenWeatherUnits } from '@Enums/open-weather-units.enum';
 import { environment } from '@Environment';
 import { MapCoordinates } from '@Models/map-coordinates.model';
 import { DeepPartial } from '@Types/deep-partial.type';
@@ -67,11 +66,7 @@ describe('WeatherRepository', (): void => {
           done();
         });
 
-      const params: HttpParams = new HttpParams({ fromObject: {
-        id: mockedCityId,
-        appid: environment.openWeatherApi.key,
-        units: OpenWeatherUnits.Metric,
-      } });
+      const params: HttpParams = new HttpParams({ fromObject: { id: mockedCityId } });
 
       const getCityWeatherRequest: TestRequest = httpMock.expectOne(
         `${environment.openWeatherApi.baseUrl}/${ApiUrls.Weather}?${params.toString()}`,
@@ -104,12 +99,7 @@ describe('WeatherRepository', (): void => {
           done();
         });
 
-      const params: HttpParams = new HttpParams({ fromObject: {
-        ...mockedCityCoordinates,
-        appid: environment.openWeatherApi.key,
-        units: OpenWeatherUnits.Metric,
-        exclude: 'current,minutely,daily,alerts'
-      } });
+      const params: HttpParams = new HttpParams({ fromObject: { ...mockedCityCoordinates, exclude: 'current,minutely,daily,alerts' } });
 
       const getCityWeatherRequest: TestRequest = httpMock.expectOne(
         `${environment.openWeatherApi.baseUrl}/${ApiUrls.OneCall}?${params.toString()}`,

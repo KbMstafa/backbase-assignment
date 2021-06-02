@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Provider } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
@@ -10,13 +11,14 @@ import { AppRoutes } from '@Enums/routes.enum';
 import { ComponentsType, ModulesType } from '@Types/module.types';
 
 import { CitiesComponent } from './components/cities/cities.component';
+import { CityForecastComponent } from './components/city-forecast/city-forecast.component';
+import { OPEN_WEATHER_INTERCEPTOR_PROVIDER } from './interceptors/open-weather.interceptor';
+import { CityWeathersResolver } from './shared/city-weathers.resolver';
 import { WeatherRepository } from './shared/weather.repository';
 import { WeatherEffects } from './store/weather.effects';
 import { WeatherFacade } from './store/weather.facade';
 import { weatherReducer } from './store/weather.reducers';
 import { WeatherRoutingModule } from './weather-routing.module';
-import { CityWeathersResolver } from './shared/city-weathers.resolver';
-import { CityForecastComponent } from './components/city-forecast/city-forecast.component';
 
 const components: ComponentsType = [
   CitiesComponent,
@@ -31,6 +33,7 @@ const primengModules: ModulesType = [
 const modules: ModulesType = [
   ...primengModules,
   CommonModule,
+  HttpClientModule,
   WeatherRoutingModule,
   TranslateModule.forChild(),
   StoreModule.forFeature(AppRoutes.Weather, weatherReducer),
@@ -45,6 +48,7 @@ const services: Provider[] = [
 
 const providers: Provider[] = [
   ...services,
+  OPEN_WEATHER_INTERCEPTOR_PROVIDER,
 ];
 
 @NgModule({
