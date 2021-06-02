@@ -3,10 +3,7 @@ import { ActionReducerMap, combineReducers } from '@ngrx/store';
 
 import { Reducers, State } from '@Models/store.model';
 
-import { weatherInitialState } from './modules/weather/store/weather.reducers';
-
 export const initialState: () => State = (): State => ({
-  weather: weatherInitialState,
   shared: {
   },
 });

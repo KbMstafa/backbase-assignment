@@ -1,12 +1,13 @@
 import { ActionReducer, createReducer, on } from '@ngrx/store';
 
-import { getCityForecastSuccess, getCityWeathersSuccess, setPending } from './weather.actions';
-import { WeatherState } from './weather.state';
 import {
   GetCityForecastSuccessActionType,
   GetCityWeathersSuccessActionType,
   SetPendingActionType,
 } from '../types/action.types';
+
+import { getCityForecastSuccess, getCityWeathersSuccess, setPending } from './weather.actions';
+import { WeatherState } from './weather.state';
 
 export const weatherInitialState: WeatherState = {
   cityWeathers: [],

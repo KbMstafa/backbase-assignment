@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SpyObject } from '@Types/spy-object.type';
 
@@ -31,7 +32,8 @@ describe('CityWeathersResolver', (): void => {
   describe('resolve', (): void => {
     it('should call weatherFacade.getCityWeathers', (done: DoneFn): void => {
       resolver.resolve()
-        .subscribe(() => {
+        .pipe(take(1))
+        .subscribe((): void => {
           expect(mockedWeatherFacade.getCityWeathers).toHaveBeenCalledOnceWith(
             Object.values(Cities).map((cityId: string) => Number(cityId)),
           );

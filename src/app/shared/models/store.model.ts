@@ -3,7 +3,7 @@ import { ActionReducer } from '@ngrx/store';
 import { WeatherState } from '@Modules/weather/store/weather.state';
 
 export interface ModuleStates {
-  weather: WeatherState;
+  weather?: WeatherState;
 }
 
 export interface Shared {

@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { take } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import { ApiUrls } from '@Enums/api-urls.enum';
@@ -50,7 +51,8 @@ describe('WeatherRepository', (): void => {
       };
 
       repository.getCityWeather(mockedCityId)
-        .subscribe((cityWeather: CityWeather) => {
+        .pipe(take(1))
+        .subscribe((cityWeather: CityWeather): void => {
           expect(cityWeather).toEqual({
             id: <number>mockedWeatherResponse.id,
             name: <string>mockedWeatherResponse.name,
@@ -91,7 +93,8 @@ describe('WeatherRepository', (): void => {
       const mockedForecastResponse: DeepPartial<ForecastResponse> = { hourly: [ mockedForecastResponseHourly ] };
 
       repository.getCityForecast(mockedCityCoordinates)
-        .subscribe((cityForecastList: CityForecast[]) => {
+        .pipe(take(1))
+        .subscribe((cityForecastList: CityForecast[]): void => {
           expect(cityForecastList).toEqual([{
             time: moment((<number>mockedForecastResponseHourly.dt) * 1000).format('HH:mm A'),
             temperature: <number>mockedForecastResponseHourly.temp,

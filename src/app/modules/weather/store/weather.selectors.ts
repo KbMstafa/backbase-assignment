@@ -1,16 +1,27 @@
 import { State } from '@Models/store.model';
+import { createSelector, MemoizedSelector } from '@ngrx/store';
 
 import { CityForecast } from '../models/city-forecast.model';
 import { CityWeather } from '../models/city-weather.model';
+import { WeatherState } from './weather.state';
 
 interface WeatherSelectors {
-  selectCityWeathers(state: State): CityWeather[];
-  selectCityForecastList(state: State): CityForecast[],
-  selectWeatherPending(state: State): boolean;
+  selectCityWeathers: MemoizedSelector<State, CityWeather[]>;
+  selectCityForecastList: MemoizedSelector<State, CityForecast[]>,
+  selectWeatherPending: MemoizedSelector<State, boolean>;
 }
 
 export const weatherSelectors: WeatherSelectors = {
-  selectCityWeathers: (state: State): CityWeather[] => state.weather.cityWeathers,
-  selectCityForecastList: (state: State): CityForecast[] => state.weather.cityForecastList,
-  selectWeatherPending: (state: State): boolean => state.weather.pending,
+  selectCityWeathers: createSelector(
+    (state: State): CityWeather[] => (<WeatherState>state.weather).cityWeathers,
+    (cityWeathers: CityWeather[]): CityWeather[] => cityWeathers,
+  ),
+  selectCityForecastList: createSelector(
+    (state: State): CityForecast[] => (<WeatherState>state.weather).cityForecastList,
+    (cityForecastList: CityForecast[]): CityForecast[] => cityForecastList,
+  ),
+  selectWeatherPending: createSelector(
+    (state: State): boolean => (<WeatherState>state.weather).pending,
+    (pending: boolean): boolean => pending,
+  ),
 };
