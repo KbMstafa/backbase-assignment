@@ -6,10 +6,10 @@ import { take } from 'rxjs/operators';
 
 import { SpyObject } from '@Types/spy-object.type';
 
-import { CityForecast } from '../models/city-forecast.model';
-import { CityWeather } from '../models/city-weather.model';
-import { WeatherRepository } from '../shared/weather.repository';
-import { GetCityForecastSuccessActionType, GetCityWeathersSuccessActionType } from '../types/action.types';
+import { CityForecast } from '../shared/models/city-forecast.model';
+import { CityWeather } from '../shared/models/city-weather.model';
+import { WeatherRepository } from '../shared/services/weather.repository';
+import { GetCityForecastSuccessActionType, GetCityWeathersSuccessActionType } from '../shared/types/action.types';
 
 import { WeatherActionsTypes } from './weather.actions';
 import { WeatherEffects } from './weather.effects';

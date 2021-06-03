@@ -1,8 +1,8 @@
 import { State } from '@Models/store.model';
 import { DeepPartial } from '@Types/deep-partial.type';
 
-import { CityForecast } from '../models/city-forecast.model';
-import { CityWeather } from '../models/city-weather.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
+import { CityWeather } from '../shared/models/city-weather.model';
 
 import { weatherSelectors } from './weather.selectors';
 

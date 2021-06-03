@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GeneralRoutes } from '@Enums/routes.enum';
 
 import { CitiesComponent } from './components/cities/cities.component';
-import { CityWeathersResolver } from './shared/city-weathers.resolver';
+import { CityWeathersResolver } from './shared/services/city-weathers.resolver';
 
 const routes: Routes = [
   {

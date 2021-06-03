@@ -7,10 +7,11 @@ import { MapCoordinates } from '@Models/map-coordinates.model';
 import { SpyObject } from '@Types/spy-object.type';
 
 import { CityForecastComponent } from '../city-forecast/city-forecast.component';
-import { CityWeather } from '../../models/city-weather.model';
+import { CityWeather } from '../../shared/models/city-weather.model';
 import { WeatherFacade } from '../../store/weather.facade';
 
 import { CitiesComponent } from './cities.component';
+import { ChangeDetectorRef } from '@angular/core';
 
 describe('CitiesComponent', (): void => {
   const weatherPendingSubject$: Subject<boolean> = new Subject();
@@ -100,7 +101,7 @@ describe('CitiesComponent', (): void => {
 
       weatherPendingSubject$.next(false);
 
-      expect(component.showCityForecast).toBe(true);
+      expect(component.showCityForecast).toBeTruthy();
     });
 
     it('should set showCityForecast property to false', (): void => {
@@ -108,7 +109,17 @@ describe('CitiesComponent', (): void => {
 
       weatherPendingSubject$.next(true);
 
-      expect(component.showCityForecast).toBe(false);
+      expect(component.showCityForecast).toBeFalsy();
+    });
+
+
+    it('should call ChangeDetectorRef.markForCheck', (): void => {
+      const markForCheckSpy: jasmine.Spy = spyOn(component['changeDetectorRef'], 'markForCheck');
+      component.displayCityForecast(mockedCoordinates);
+
+      weatherPendingSubject$.next(true);
+
+      expect(markForCheckSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

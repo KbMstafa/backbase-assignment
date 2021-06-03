@@ -1,17 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MapCoordinates } from '@Models/map-coordinates.model';
 import { TableColumn } from '@Models/table-column.model';
 
-import { CITY_WEATHER_COLUMNS } from '../../consts/city-weather-columns.const';
-import { CityWeather } from '../../models/city-weather.model';
+import { CITY_WEATHER_COLUMNS } from '../../shared/consts/city-weather-columns.const';
+import { CityWeather } from '../../shared/models/city-weather.model';
 import { WeatherFacade } from '../../store/weather.facade';
 
 @Component({
-  selector: 'app-cities',
+  selector: 'ba-cities',
   templateUrl: './cities.component.html',
-  styleUrls: ['./cities.component.scss']
+  styleUrls: ['./cities.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CitiesComponent implements OnInit, OnDestroy {
   public cities: CityWeather[] = [];
@@ -24,6 +25,7 @@ export class CitiesComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly weatherFacade: WeatherFacade,
+    private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
   }
 
@@ -48,5 +50,7 @@ export class CitiesComponent implements OnInit, OnDestroy {
 
   private toggleShowCityForecast(hideCityForecast: boolean): void {
     this.showCityForecast = !hideCityForecast;
+
+    this.changeDetectorRef.markForCheck();
   }
 }

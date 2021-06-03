@@ -6,11 +6,11 @@ import { ChartOptions } from 'chart.js';
 
 import { SpyObject } from '@Types/spy-object.type';
 
-import { TEMPERATURE_DATASET_CONFIGURATION } from '../../consts/temperature-dataset-conf.const';
-import { WIND_SPEED_DATASET_CONFIGURATION } from '../../consts/wind-speed-dataset-conf.const';
-import { CityForecast } from '../../models/city-forecast.model';
+import { TEMPERATURE_DATASET_CONFIGURATION } from '../../shared/consts/temperature-dataset-conf.const';
+import { WIND_SPEED_DATASET_CONFIGURATION } from '../../shared/consts/wind-speed-dataset-conf.const';
+import { CityForecast } from '../../shared/models/city-forecast.model';
+import * as forecastUtil from '../../shared/utils/get-forecast-options.util';
 import { WeatherFacade } from '../../store/weather.facade';
-import * as forecastUtil from '../../utils/get-forecast-options.util';
 
 import { CityForecastComponent } from './city-forecast.component';
 import { ChartModule } from 'primeng/chart';

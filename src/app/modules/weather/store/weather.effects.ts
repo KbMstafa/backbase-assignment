@@ -4,12 +4,12 @@ import { Actions, createEffect, CreateEffectMetadata, ofType } from '@ngrx/effec
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 
-import { CityCoordinatesProps, CityIdsProps } from '../models/action-props.model';
-import { CityForecast } from '../models/city-forecast.model';
-import { CityWeather } from '../models/city-weather.model';
-import { WeatherRepository } from '../shared/weather.repository';
+import { CityCoordinatesProps, CityIdsProps } from '../shared/models/action-props.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
+import { CityWeather } from '../shared/models/city-weather.model';
+import { WeatherRepository } from '../shared/services/weather.repository';
+import { GetCityForecastSuccessActionType, GetCityWeathersSuccessActionType } from '../shared/types/action.types';
 import { getCityForecastSuccess, getCityWeathersSuccess, WeatherActionsTypes } from '../store/weather.actions';
-import { GetCityForecastSuccessActionType, GetCityWeathersSuccessActionType } from '../types/action.types';
 
 import { WeatherFacade } from './weather.facade';
 

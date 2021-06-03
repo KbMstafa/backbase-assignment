@@ -1,8 +1,9 @@
 import { State } from '@Models/store.model';
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 
-import { CityForecast } from '../models/city-forecast.model';
-import { CityWeather } from '../models/city-weather.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
+import { CityWeather } from '../shared/models/city-weather.model';
+
 import { WeatherState } from './weather.state';
 
 interface WeatherSelectors {

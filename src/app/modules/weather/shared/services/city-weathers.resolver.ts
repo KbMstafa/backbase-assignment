@@ -3,18 +3,18 @@ import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
 
-import { Cities } from '../enums/cities.enum';
-import { WeatherFacade } from '../store/weather.facade';
+import { Cities } from '../../shared/enums/cities.enum';
+import { WeatherFacade } from '../../store/weather.facade';
 
 @Injectable()
-export class CityWeathersResolver implements Resolve<void> {
+export class CityWeathersResolver implements Resolve<boolean> {
 
   public constructor(
     private readonly weatherFacade: WeatherFacade,
   ) {
   }
 
-  public resolve(): Observable<void> {
+  public resolve(): Observable<boolean> {
     this.weatherFacade.getCityWeathers(
       Object.values(Cities).map((cityId: string) => Number(cityId)),
     );
@@ -22,7 +22,6 @@ export class CityWeathersResolver implements Resolve<void> {
     return this.weatherFacade.weatherPending$
       .pipe(
         filter((pending: boolean): boolean => !pending),
-        map((): void => { return; }),
         take(1),
       );
   }

@@ -1,19 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { TEMPERATURE_DATASET_CONFIGURATION } from '../../consts/temperature-dataset-conf.const';
-import { WIND_SPEED_DATASET_CONFIGURATION } from '../../consts/wind-speed-dataset-conf.const';
-import { CityForecast } from '../../models/city-forecast.model';
+import { TEMPERATURE_DATASET_CONFIGURATION } from '../../shared/consts/temperature-dataset-conf.const';
+import { WIND_SPEED_DATASET_CONFIGURATION } from '../../shared/consts/wind-speed-dataset-conf.const';
+import { CityForecast } from '../../shared/models/city-forecast.model';
+import { getCityForecastOptions } from '../../shared/utils/get-forecast-options.util';
 import { WeatherFacade } from '../../store/weather.facade';
-import { getCityForecastOptions } from '../../utils/get-forecast-options.util';
 
 @Component({
   selector: 'ba-city-forecast',
   templateUrl: './city-forecast.component.html',
-  styleUrls: ['./city-forecast.component.scss']
+  styleUrls: ['./city-forecast.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CityForecastComponent implements OnInit, OnDestroy {
   public cityForecastData: ChartData = {};

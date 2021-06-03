@@ -1,10 +1,11 @@
 import { DeepPartial } from '@Types/deep-partial.type';
 
+import { CityWeather } from '../shared/models/city-weather.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
+
 import { getCityForecastSuccess, getCityWeathersSuccess, setPending } from './weather.actions';
 import { WeatherState } from './weather.state';
 import { weatherReducer } from './weather.reducers';
-import { CityWeather } from '../models/city-weather.model';
-import { CityForecast } from '../models/city-forecast.model';
 
 describe('WeatherReducer', (): void => {
   describe('setPending action', (): void => {

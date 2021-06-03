@@ -8,7 +8,7 @@ import {
   CityWeathersProps,
   CityCoordinatesProps,
   CityForecastListProps,
-} from '../models/action-props.model';
+} from '../shared/models/action-props.model';
 
 export enum WeatherActionsTypes {
   SetPending = '[Weather] SET_PENDING',

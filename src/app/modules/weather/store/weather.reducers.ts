@@ -4,7 +4,7 @@ import {
   GetCityForecastSuccessActionType,
   GetCityWeathersSuccessActionType,
   SetPendingActionType,
-} from '../types/action.types';
+} from '../shared/types/action.types';
 
 import { getCityForecastSuccess, getCityWeathersSuccess, setPending } from './weather.actions';
 import { WeatherState } from './weather.state';

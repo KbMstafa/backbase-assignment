@@ -12,9 +12,9 @@ import { ComponentsType, ModulesType } from '@Types/module.types';
 
 import { CitiesComponent } from './components/cities/cities.component';
 import { CityForecastComponent } from './components/city-forecast/city-forecast.component';
-import { OPEN_WEATHER_INTERCEPTOR_PROVIDER } from './interceptors/open-weather.interceptor';
-import { CityWeathersResolver } from './shared/city-weathers.resolver';
-import { WeatherRepository } from './shared/weather.repository';
+import { OPEN_WEATHER_INTERCEPTOR_PROVIDER } from './shared/interceptors/open-weather.interceptor';
+import { CityWeathersResolver } from './shared/services/city-weathers.resolver';
+import { WeatherRepository } from './shared/services/weather.repository';
 import { WeatherEffects } from './store/weather.effects';
 import { WeatherFacade } from './store/weather.facade';
 import { weatherReducer } from './store/weather.reducers';

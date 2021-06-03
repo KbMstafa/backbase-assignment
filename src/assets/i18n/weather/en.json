@@ -3,12 +3,12 @@
     "LIST_OF_CITIES": "List of Cities",
     "FIELDS": {
       "CITY_NAME": "City Name",
-      "TEMPERATURE": "Temperature (m/s)",
-      "WIND_SPEED": "Wind Speed (C)"
+      "TEMPERATURE": "Temperature (C)",
+      "WIND_SPEED": "Wind Speed (m/s)"
     },
     "FORECAST": {
-      "TEMPERATURE": "Temperature (m/s)",
-      "WIND_SPEED": "Wind Speed (C)",
+      "TEMPERATURE": "Temperature (C)",
+      "WIND_SPEED": "Wind Speed (m/s)",
       "TIME": "Time"
     }
   }

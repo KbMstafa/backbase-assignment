@@ -1,5 +1,5 @@
-import { CityForecast } from '../models/city-forecast.model';
-import { CityWeather } from '../models/city-weather.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
+import { CityWeather } from '../shared/models/city-weather.model';
 
 export interface WeatherState {
   cityWeathers: CityWeather[];

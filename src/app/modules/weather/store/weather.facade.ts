@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { MapCoordinates } from '@Models/map-coordinates.model';
 import { State } from '@Models/store.model';
 
-import { CityWeather } from '../models/city-weather.model';
+import { CityWeather } from '../shared/models/city-weather.model';
+import { CityForecast } from '../shared/models/city-forecast.model';
 import { getCityForecast, getCityWeathers, setPending } from '../store/weather.actions';
 import { weatherSelectors } from '../store/weather.selectors';
-import { MapCoordinates } from '@Models/map-coordinates.model';
-import { CityForecast } from '../models/city-forecast.model';
-
 
 @Injectable()
 export class WeatherFacade {

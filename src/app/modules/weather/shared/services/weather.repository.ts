@@ -36,7 +36,7 @@ export class WeatherRepository {
           coordinates: {
             lat: weather.coord.lat,
             lon: weather.coord.lon,
-          }
+          },
         })),
       );
   }

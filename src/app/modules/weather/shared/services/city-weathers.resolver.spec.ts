@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 import { SpyObject } from '@Types/spy-object.type';
 
 import { Cities } from '../enums/cities.enum';
-import { WeatherFacade } from '../store/weather.facade';
+import { WeatherFacade } from '../../store/weather.facade';
 
 import { CityWeathersResolver } from './city-weathers.resolver';
 
